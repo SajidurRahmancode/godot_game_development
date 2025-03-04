@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cu8jxct6x6pi8"]
+[gd_scene load_steps=29 format=3 uid="uid://cu8jxct6x6pi8"]
 
 [ext_resource type="Script" path="res://scenes/scripts/manager.gd" id="1_k1hvw"]
 [ext_resource type="PackedScene" uid="uid://b3d2v5oiqdx1a" path="res://scenes/player.tscn" id="1_r4s8r"]
@@ -7,8 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://cfsbwq4ga35qm" path="res://scenes/coin.tscn" id="4_5ybfq"]
 [ext_resource type="PackedScene" uid="uid://crufdxp514ccu" path="res://scenes/slime.tscn" id="4_ebu2b"]
 [ext_resource type="PackedScene" uid="uid://gbc44wfm5b2o" path="res://scenes/killzone.tscn" id="5_kjcqt"]
+[ext_resource type="PackedScene" uid="uid://pi7ltu4j8wen" path="res://scenes/movingplat.tscn" id="6_ql44a"]
 [ext_resource type="FontFile" uid="uid://dksnqwcj8rktl" path="res://fonts/PixelOperator8.ttf" id="7_c7ild"]
+[ext_resource type="PackedScene" uid="uid://cndtkfo5ktvcf" path="res://scenes/mobslime.tscn" id="7_feg8t"]
 [ext_resource type="PackedScene" uid="uid://kjjyeylc0l5x" path="res://scenes/orc.tscn" id="8_xo1ts"]
+[ext_resource type="Texture2D" uid="uid://clwslay1iy0ir" path="res://sprites/MiniLumberjack.png" id="10_xetu0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cr4mv"]
 texture = ExtResource("2_d6ql1")
@@ -179,6 +182,45 @@ texture = ExtResource("2_d6ql1")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_cr4mv")
 
+[sub_resource type="Animation" id="Animation_ly37p"]
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1527, 34), Vector2(1904, 39)]
+}
+
+[sub_resource type="Animation" id="Animation_16ag7"]
+resource_name = "move"
+length = 3.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1522, 38), Vector2(1812, 42)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3ynij"]
+_data = {
+"RESET": SubResource("Animation_ly37p"),
+"move": SubResource("Animation_16ag7")
+}
+
 [sub_resource type="Animation" id="Animation_snb0m"]
 length = 0.001
 tracks/0/type = "value"
@@ -219,6 +261,56 @@ _data = {
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ixwg1"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ag5ql"]
+atlas = ExtResource("10_xetu0")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5s41d"]
+atlas = ExtResource("10_xetu0")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ceuil"]
+atlas = ExtResource("10_xetu0")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2voc"]
+atlas = ExtResource("10_xetu0")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_to4pu"]
+atlas = ExtResource("10_xetu0")
+region = Rect2(128, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jsbk"]
+atlas = ExtResource("10_xetu0")
+region = Rect2(160, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y644l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ag5ql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5s41d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ceuil")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q2voc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_to4pu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2jsbk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Game" type="Node2D"]
 
 [node name="Manager" type="Node" parent="."]
@@ -236,6 +328,17 @@ text = "collected"
 horizontal_alignment = 1
 autowrap_mode = 2
 
+[node name="scorelabel2" type="Label" parent="Manager"]
+offset_left = 2103.0
+offset_top = -42.0
+offset_right = 2275.0
+offset_bottom = -19.0
+rotation = 0.0045054
+theme_override_fonts/font = ExtResource("7_c7ild")
+text = "collected"
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(19, 0)
 tile_set = SubResource("TileSet_rv6h4")
@@ -246,7 +349,7 @@ layer_1/name = "Player"
 layer_1/tile_data = PackedInt32Array(262143, 0, 0, 196608, 0, 0, 196609, 0, 0, 262142, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327687, 65536, 0, 327688, 65536, 0, 393208, 0, 0, 393209, 0, 0, 393211, 0, 0, 393210, 0, 0, 393212, 0, 0, 131066, 131072, 5, 458744, 65536, 0, 458745, 65536, 0, 458746, 65536, 0, 458747, 65536, 0, 458748, 65536, 0, 393218, 65536, 0, 393219, 65536, 0, 393220, 65536, 0, 393223, 65536, 0, 393224, 65536, 0, 327678, 65536, 0, 327679, 65536, 0, 262144, 65536, 0, 262145, 65536, 0, 196602, 131072, 6, 131067, 196608, 5, 196603, 196608, 6, 262139, 196608, 7, 327675, 196608, 8, 131068, 262144, 5, 196604, 262144, 6, 327676, 262144, 8, 327690, 0, 0, 327691, 0, 0, 393226, 0, 1, 393227, 0, 1, 327702, 65536, 0, 327703, 65536, 0, 327704, 65536, 0, 327705, 0, 0, 327706, 0, 0, 327707, 0, 0, 327708, 0, 0, 327709, 0, 0, 327710, 0, 0, 327711, 589824, 0, 327712, 655360, 0, 327713, 720896, 0, 327714, 0, 0, 327715, 0, 0, 327716, 0, 0, 327717, 0, 0, 327718, 0, 0, 327719, 0, 0, 327720, 0, 0, 327721, 0, 0, 327722, 0, 0, 65573, 196608, 5, 131109, 196608, 6, 196645, 196608, 7, 262181, 196608, 8, 65563, 196608, 5, 131099, 196608, 6, 196635, 196608, 7, 262171, 196608, 8, 16, 65536, 8, 327723, 589824, 0, 327724, 655360, 0, 327725, 720896, 0, 327726, 0, 0, 327727, 0, 0, 327728, 0, 0, 327729, 0, 0, 327730, 0, 0, 327731, 0, 0, 327732, 0, 0, 327733, 0, 0, 327734, 0, 0, 65592, 0, 0, 65593, 0, 0, 65594, 0, 0, 65595, 0, 0, 65596, 0, 0, 65597, 0, 0, 65598, 589824, 0, 65599, 655360, 0, 65600, 720896, 0, 65601, 0, 0, 65602, 0, 0, 65603, 0, 0, 65604, 0, 0, 65605, 0, 0, 65606, 0, 0, 65607, 0, 0, 65548, 0, 0, 65549, 0, 0, 65550, 0, 0, 65551, 0, 0, 65552, 0, 0, 65557, 0, 0, 65556, 0, 0, 65555, 0, 0, 65554, 0, 0, 65553, 0, 0, 262151, 0, 0, 262152, 0, 0, 262154, 65536, 0, 262155, 65536, 0, 196619, 0, 0, 262168, 0, 0, 262167, 0, 0, 262166, 0, 0, -130996, 0, 0, -130995, 0, 0, -130994, 0, 0, -130993, 0, 0, -130992, 0, 0, -130991, 0, 0, -130990, 0, 0, -130989, 0, 0, -65460, 0, 1, -65459, 0, 1, -65458, 0, 1, -65457, 0, 1, -65456, 0, 1, -65455, 0, 1, -65454, 0, 1, -65453, 0, 1, 262219, 0, 0, 262220, 0, 0, 262221, 0, 0, 262222, 0, 0, 262223, 0, 0, 262224, 0, 0, 262225, 0, 0, 262226, 0, 0, 262227, 0, 0, 262228, 0, 0, 327755, 65536, 0, 327756, 65536, 0, 327757, 65536, 0, 327758, 65536, 0, 327759, 65536, 0, 327760, 65536, 0, 327761, 65536, 0, 327762, 65536, 0, 327763, 65536, 0, 327764, 65536, 0, 89, 0, 0, 90, 0, 0, 91, 0, 0, 92, 0, 0, 93, 0, 0, 94, 0, 0, 95, 0, 0, 96, 0, 0, 97, 0, 0, 98, 0, 0, 99, 0, 0, 100, 0, 0, 262234, 0, 0, 262235, 0, 0, 262236, 0, 0, 262237, 0, 0, 262238, 0, 0, 262239, 0, 0, 262240, 0, 0, 262241, 0, 0, 262242, 0, 0, 262243, 0, 0, 262244, 0, 0, 262245, 0, 0, -196515, 0, 3, -130979, 0, 4, -65443, 0, 5, 196702, 458752, 6, -196528, 524288, 5, 196684, 524288, 5, 69, 524288, 5, 68, 524288, 8, 262182, 262144, 8, 262172, 262144, 8, 196690, 458752, 7, 107, 0, 0, 108, 0, 0, 109, 0, 0, 110, 0, 0, 111, 0, 0, 112, 0, 0, 113, 0, 0, 114, 0, 0, 115, 0, 0, 116, 0, 0, 117, 0, 0, 118, 0, 0, 119, 0, 0, 137, 0, 0, 138, 0, 0, 139, 0, 0, 140, 0, 0, 141, 0, 0, 142, 0, 0, 143, 0, 0, 144, 0, 0, 145, 0, 0, 146, 0, 0, 126, 0, 0, 127, 0, 0, 128, 0, 0, 129, 0, 0, 130, 0, 0, 131, 0, 0, -196495, 0, 3, -130959, 0, 4, -65423, 0, 5, -262026, 196608, 5, -196490, 196608, 6, -130954, 196608, 7, -65418, 196608, 8, -262027, 131072, 5, -262025, 262144, 5, -65419, 524288, 5, -65417, 524288, 5, -262015, 196608, 5, -196479, 196608, 6, -130943, 196608, 7, -65407, 196608, 8, -262016, 131072, 5, -262014, 262144, 5, 123, 196608, 5, 65659, 196608, 6, 131195, 196608, 7, 196731, 196608, 8, 122, 131072, 5, 124, 262144, 5)
 
 [node name="PLAYER" parent="." instance=ExtResource("1_r4s8r")]
-position = Vector2(2, 36)
+position = Vector2(1548, 0)
 
 [node name="Camera2D" type="Camera2D" parent="PLAYER"]
 position = Vector2(16, -8)
@@ -255,6 +358,15 @@ limit_bottom = 220
 limit_smoothed = true
 
 [node name="Platforms" type="Node" parent="."]
+
+[node name="movingplat" parent="Platforms" instance=ExtResource("6_ql44a")]
+position = Vector2(1527, 34)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/movingplat"]
+libraries = {
+"": SubResource("AnimationLibrary_3ynij")
+}
+autoplay = "RESET"
 
 [node name="Platform3" parent="Platforms" instance=ExtResource("3_w6amx")]
 position = Vector2(624, 23)
@@ -278,10 +390,12 @@ libraries = {
 [node name="Platform" parent="Platforms" instance=ExtResource("3_w6amx")]
 position = Vector2(-1, 7)
 
-[node name="Platform6" parent="Platforms" instance=ExtResource("3_w6amx")]
-position = Vector2(1673, 31)
+[node name="Mobslime" parent="." instance=ExtResource("7_feg8t")]
+position = Vector2(827, 94)
+rotation = 0.00440827
+scale = Vector2(0.140124, 0.108853)
 
-[node name="Slime" parent="Platforms" instance=ExtResource("4_ebu2b")]
+[node name="Slime2" parent="." instance=ExtResource("4_ebu2b")]
 position = Vector2(587, 69)
 
 [node name="Coins" type="Node" parent="."]
@@ -340,6 +454,15 @@ position = Vector2(1881, -8)
 [node name="Coin18" parent="Coins" instance=ExtResource("4_5ybfq")]
 position = Vector2(1495, 57)
 
+[node name="Coin19" parent="Coins" instance=ExtResource("4_5ybfq")]
+position = Vector2(1955, 56)
+
+[node name="Coin20" parent="Coins" instance=ExtResource("4_5ybfq")]
+position = Vector2(2021, 56)
+
+[node name="Coin21" parent="Coins" instance=ExtResource("4_5ybfq")]
+position = Vector2(2049, 56)
+
 [node name="killzone" parent="." instance=ExtResource("5_kjcqt")]
 position = Vector2(-51, 156)
 
@@ -348,6 +471,13 @@ shape = SubResource("WorldBoundaryShape2D_ixwg1")
 
 [node name="Slime" parent="." instance=ExtResource("4_ebu2b")]
 position = Vector2(678, 69)
+
+[node name="Lumberjack" type="AnimatedSprite2D" parent="."]
+position = Vector2(2076, -17)
+scale = Vector2(1.20313, 1.15625)
+sprite_frames = SubResource("SpriteFrames_y644l")
+autoplay = "default"
+frame_progress = 0.566084
 
 [node name="Label" type="Label" parent="."]
 offset_left = 23.0
@@ -359,4 +489,10 @@ theme_override_fonts/font = ExtResource("7_c7ild")
 text = "Space to jump"
 
 [node name="Orc" parent="." instance=ExtResource("8_xo1ts")]
-position = Vector2(1971, 57)
+position = Vector2(2054, 61)
+
+[node name="Coin" parent="." instance=ExtResource("4_5ybfq")]
+position = Vector2(1852, -9)
+
+[node name="Coin2" parent="." instance=ExtResource("4_5ybfq")]
+position = Vector2(2055, -7)

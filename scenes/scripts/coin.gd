@@ -7,5 +7,5 @@ extends Area2D
 
 
 func _on_body_entered(body: Node2D) -> void:
-	manager.add_point()
+	manager.add_point(1)
 	queue_free()

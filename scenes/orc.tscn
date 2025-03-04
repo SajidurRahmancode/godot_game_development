@@ -1,8 +1,41 @@
-[gd_scene load_steps=14 format=3 uid="uid://kjjyeylc0l5x"]
+[gd_scene load_steps=24 format=3 uid="uid://kjjyeylc0l5x"]
 
 [ext_resource type="Script" path="res://scenes/scripts/orc.gd" id="1_k33ay"]
 [ext_resource type="Texture2D" uid="uid://dfbhnbs0fq15r" path="res://sprites/Orc.png" id="1_xmkym"]
 [ext_resource type="PackedScene" uid="uid://gbc44wfm5b2o" path="res://scenes/killzone.tscn" id="2_lall0"]
+[ext_resource type="Texture2D" uid="uid://cx27j50u3a63b" path="res://sprites/Free Smoke Fx  Pixel 05.png" id="2_puh4h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58lvy"]
+atlas = ExtResource("2_puh4h")
+region = Rect2(128, 0, 64, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acuuk"]
+atlas = ExtResource("2_puh4h")
+region = Rect2(192, 0, 64, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_as05e"]
+atlas = ExtResource("2_puh4h")
+region = Rect2(256, 0, 64, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5to4x"]
+atlas = ExtResource("2_puh4h")
+region = Rect2(320, 0, 64, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lrvvf"]
+atlas = ExtResource("2_puh4h")
+region = Rect2(384, 0, 64, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjnd8"]
+atlas = ExtResource("2_puh4h")
+region = Rect2(448, 0, 64, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3qyj"]
+atlas = ExtResource("2_puh4h")
+region = Rect2(512, 0, 64, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3xtqq"]
+atlas = ExtResource("2_puh4h")
+region = Rect2(576, 0, 64, 68)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ovtx5"]
 atlas = ExtResource("1_xmkym")
@@ -40,6 +73,35 @@ region = Rect2(700, 100, 100, 100)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_58lvy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acuuk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_as05e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5to4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lrvvf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjnd8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3qyj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3xtqq")
+}],
+"loop": false,
+"name": &"death",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ovtx5")
 }, {
 "duration": 1.0,
@@ -68,25 +130,43 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_015g2"]
+size = Vector2(13.3281, 1.5)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_16vr7"]
-size = Vector2(11, 15)
+size = Vector2(10.75, 7.5)
 
 [node name="Orc" type="Node2D"]
 script = ExtResource("1_k33ay")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -4.5)
+scale = Vector2(1, 0.99)
 sprite_frames = SubResource("SpriteFrames_iph33")
-autoplay = "default"
-frame_progress = 0.867489
-
-[node name="killzone" parent="AnimatedSprite2D" instance=ExtResource("2_lall0")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/killzone"]
-position = Vector2(0.5, -0.5)
-shape = SubResource("RectangleShape2D_16vr7")
+frame_progress = 0.746421
 
 [node name="RayCastRight" type="RayCast2D" parent="."]
 target_position = Vector2(14, 0)
 
 [node name="RayCastLeft" type="RayCast2D" parent="."]
 target_position = Vector2(-8, 0)
+
+[node name="getdamagebox" type="Area2D" parent="."]
+position = Vector2(5.96046e-08, -9)
+scale = Vector2(1, 1)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="getdamagebox"]
+position = Vector2(2, -3)
+shape = SubResource("RectangleShape2D_015g2")
+
+[node name="killzone" parent="." instance=ExtResource("2_lall0")]
+position = Vector2(1, -4.5)
+scale = Vector2(1, 0.99)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
+position = Vector2(0.980392, 1.51515)
+shape = SubResource("RectangleShape2D_16vr7")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="getdamagebox" to="." method="_on_getdamagebox_body_entered"]
