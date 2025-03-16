@@ -40,6 +40,9 @@ func update_ray_direction():
 	# Move RayCast2D to always point forward
 	$RayCast2D.position.x  = abs($RayCast2D.position.x) * (-1 if facing_left else 1)
 
+
+
+
 func _on_killzone_body_entered(body: Node2D) -> void:
 	if "player" in body.name:
 		body.queue_free()
@@ -49,19 +52,9 @@ func _on_getdamagebox_body_entered(body: Node2D) -> void:
 	if "PLAYER" in body.name:
 		health -= 1
 		if health <= 0:
-			die()
-
-func die():
-	if is_dead:
-		return
-	is_dead = true
-	print("Enemy health is zero. Playing death animation.")
-	animated_sprite_2d.play("death")
-	print("Death animation played.")
-	manager.add_point(100)
-
-func _on_animation_finished():
-	print("Animation finished. Current animation:", animated_sprite_2d.animation)
-	if animated_sprite_2d.animation == "death":
-		print("Death animation finished. Queueing free.")
-		queue_free()
+			print("Enemy health is zero. Playing death animation.")
+			animated_sprite_2d.play("death")
+			print("Death animation played.")
+			manager.add_point(150)
+		
+			queue_free()	

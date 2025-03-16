@@ -3,43 +3,43 @@
 [ext_resource type="Script" path="res://scenes/chest.gd" id="2_aog2l"]
 [ext_resource type="Texture2D" uid="uid://cg4kdyjquu3dg" path="res://sprites/Chests.png" id="2_qg2fa"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wa2kp"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3oe2"]
 atlas = ExtResource("2_qg2fa")
-region = Rect2(0, 36, 48, 36)
+region = Rect2(0, 160, 48, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nveko"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypp3l"]
 atlas = ExtResource("2_qg2fa")
-region = Rect2(48, 36, 48, 36)
+region = Rect2(48, 160, 48, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_p56ck"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4d1gh"]
 atlas = ExtResource("2_qg2fa")
-region = Rect2(96, 36, 48, 36)
+region = Rect2(96, 160, 48, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bilj0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3ddi"]
 atlas = ExtResource("2_qg2fa")
-region = Rect2(144, 36, 48, 36)
+region = Rect2(144, 160, 48, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2d0fa"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5rvf"]
 atlas = ExtResource("2_qg2fa")
-region = Rect2(192, 36, 48, 36)
+region = Rect2(192, 160, 48, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o2bjp"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wa2kp")
+"texture": SubResource("AtlasTexture_e3oe2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nveko")
+"texture": SubResource("AtlasTexture_ypp3l")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_p56ck")
+"texture": SubResource("AtlasTexture_4d1gh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bilj0")
+"texture": SubResource("AtlasTexture_m3ddi")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2d0fa")
+"texture": SubResource("AtlasTexture_d5rvf")
 }],
 "loop": false,
 "name": &"open",
@@ -47,7 +47,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wr6bo"]
-size = Vector2(23.5, 21)
+size = Vector2(25.75, 21.5)
 
 [node name="chest" type="Area2D"]
 script = ExtResource("2_aog2l")
@@ -57,7 +57,7 @@ sprite_frames = SubResource("SpriteFrames_o2bjp")
 animation = &"open"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-7.75, -0.5)
+position = Vector2(-7.875, 5.25)
 shape = SubResource("RectangleShape2D_wr6bo")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
