@@ -1,0 +1,99 @@
+[gd_scene load_steps=13 format=3 uid="uid://b2c2b14hx6y0s"]
+
+[ext_resource type="Script" path="res://scenes/scripts/minatour.gd" id="1_8isk8"]
+[ext_resource type="Texture2D" uid="uid://bwgqor85xse68" path="res://sprites/Minotaur - Sprite Sheet.png" id="1_vmj0h"]
+[ext_resource type="PackedScene" uid="uid://gbc44wfm5b2o" path="res://scenes/killzone.tscn" id="12_5d7h1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ifmc"]
+atlas = ExtResource("1_vmj0h")
+region = Rect2(5, 91, 92, 91)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slp4x"]
+atlas = ExtResource("1_vmj0h")
+region = Rect2(97, 91, 92, 91)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxmg3"]
+atlas = ExtResource("1_vmj0h")
+region = Rect2(189, 91, 92, 91)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42orx"]
+atlas = ExtResource("1_vmj0h")
+region = Rect2(281, 91, 92, 91)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bb43n"]
+atlas = ExtResource("1_vmj0h")
+region = Rect2(373, 91, 92, 91)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iph33"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ifmc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_slp4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxmg3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42orx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bb43n")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e6ofk"]
+size = Vector2(19.5, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_015g2"]
+size = Vector2(24.832, 3.375)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_16vr7"]
+size = Vector2(22.2402, 14.3421)
+
+[node name="Minatour" type="CharacterBody2D"]
+light_mask = 3
+visibility_layer = 3
+script = ExtResource("1_8isk8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, -10)
+scale = Vector2(0.4577, 0.465204)
+sprite_frames = SubResource("SpriteFrames_iph33")
+autoplay = "default"
+frame = 2
+frame_progress = 0.895166
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -9)
+shape = SubResource("RectangleShape2D_e6ofk")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-9, -8)
+target_position = Vector2(0, 13)
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+position = Vector2(8, -7)
+target_position = Vector2(0, 13)
+
+[node name="getdamagebox" type="Area2D" parent="."]
+position = Vector2(5.96046e-08, -9)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="getdamagebox"]
+position = Vector2(1.58399, -8.6875)
+shape = SubResource("RectangleShape2D_015g2")
+
+[node name="killzone" parent="." instance=ExtResource("12_5d7h1")]
+position = Vector2(1, -4.5)
+scale = Vector2(1, 0.99)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
+position = Vector2(1.87988, -3.63567)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_16vr7")

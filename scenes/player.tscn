@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://b3d2v5oiqdx1a"]
+[gd_scene load_steps=10 format=3 uid="uid://b3d2v5oiqdx1a"]
 
 [ext_resource type="Texture2D" uid="uid://dya7r4qtmjm22" path="res://sprites/knight.png" id="1_6nbel"]
 [ext_resource type="Script" path="res://scenes/scripts/player.gd" id="1_vii6r"]
+[ext_resource type="FontFile" uid="uid://b7unlfawg1kum" path="res://fonts/PixelOperator8-Bold.ttf" id="3_v1027"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v3xc7"]
 atlas = ExtResource("1_6nbel")
@@ -42,9 +43,10 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_hr62l"]
 radius = 5.0
 
-[node name="PLAYER" type="CharacterBody2D"]
+[node name="PLAYER" type="CharacterBody2D" groups=["player"]]
 position = Vector2(-1, 4)
-collision_layer = 2
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_vii6r")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -58,3 +60,10 @@ frame_progress = 0.780927
 z_index = 5
 position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_hr62l")
+
+[node name="playerscore" type="Label" parent="."]
+offset_left = -10.0
+offset_top = 83.0
+offset_right = 30.0
+offset_bottom = 106.0
+theme_override_fonts/font = ExtResource("3_v1027")

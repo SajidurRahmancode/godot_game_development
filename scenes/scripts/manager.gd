@@ -2,6 +2,9 @@ extends Node
 
 @onready var scorelabel: Label = $scorelabel
 @onready var scorelabel2: Label = $scorelabel2
+@onready var playerscore: Label = $playerscore
+
+
 
 var score = 0
 

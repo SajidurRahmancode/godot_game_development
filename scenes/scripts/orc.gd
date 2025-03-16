@@ -1,7 +1,7 @@
 extends Node2D
 
-const speed = 10
-
+var base_speed = 10
+var speed = base_speed
 var direction = 1
 var is_dead = false
 
@@ -23,13 +23,26 @@ func _process(delta: float) -> void:
 		queue_free()
 		return
 
-	if ray_cast_right.is_colliding():
-		direction = -1
-		animated_sprite_2d.flip_h = true
-	if ray_cast_left.is_colliding():
-		direction = 1
-		animated_sprite_2d.flip_h = false
+	speed = base_speed  # Reset speed to base speed each frame
 
+	if ray_cast_right.is_colliding():
+		var collider = ray_cast_right.get_collider()
+		if collider:
+			if collider.name == "PLAYER":  # Detect player on the right
+				speed = base_speed * 2  # Increase speed
+			else:  # Ignore the player for direction change
+				direction = -1
+				animated_sprite_2d.flip_h = true
+		
+	if ray_cast_left.is_colliding():
+		var collider = ray_cast_left.get_collider()
+		if collider:
+			if collider.name == "PLAYER":  # Detect player on the left
+				speed = base_speed * 2  # Increase speed
+			else:  # Ignore the player for direction change
+				direction = 1
+				animated_sprite_2d.flip_h = false
+		
 	position.x += direction * speed * delta
 
 func _on_killzone_body_entered(body: Node2D) -> void:
