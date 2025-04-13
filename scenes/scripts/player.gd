@@ -1,10 +1,13 @@
 extends CharacterBody2D
 
-
 const SPEED = 230.0
 const JUMP_VELOCITY = -400.0
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var camera_2d: Camera2D = $Camera2D
+
+func _ready():
+	camera_2d.make_current()
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -18,23 +21,27 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("ui_left", "ui_right")
-	
-	if direction>0:
-		animated_sprite_2d.flip_h=false
-	elif direction<0:
-		animated_sprite_2d.flip_h=true
-	
+
+	if direction > 0:
+		animated_sprite_2d.flip_h = false
+	elif direction < 0:
+		animated_sprite_2d.flip_h = true
+
 	if is_on_floor():
-		if direction==0:
+		if direction == 0:
 			animated_sprite_2d.play("IDLE")
-		else: 
-			animated_sprite_2d.play("run")		
+		else:
+			animated_sprite_2d.play("run")
 	else:
 		animated_sprite_2d.play("jump")
-		
+
 	if direction:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+	if position.y > 900:
+
+		get_tree().change_scene_to_file("res://scenes/deathscreentry.tscn")
 
 	move_and_slide()

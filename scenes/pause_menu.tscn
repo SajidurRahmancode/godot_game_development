@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=3 uid="uid://vc3k3mqspfle"]
+
+[ext_resource type="Script" path="res://scenes/scripts/pause_menu.gd" id="1_nlq5e"]
+[ext_resource type="FontFile" uid="uid://b7unlfawg1kum" path="res://fonts/PixelOperator8-Bold.ttf" id="2_wwquk"]
+[ext_resource type="Texture2D" uid="uid://dffkvck0u018r" path="res://IconGodotNode/color/icon_weapon.png" id="3_scgui"]
+[ext_resource type="Texture2D" uid="uid://bfjwe8p8gon4" path="res://IconGodotNode/node_2D/icon_follower.png" id="4_qff13"]
+[ext_resource type="Texture2D" uid="uid://b7qo35spayn5" path="res://sprites/5.png" id="5_w5j3p"]
+
+[sub_resource type="Theme" id="Theme_uqxbs"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1477.0
+offset_top = 247.0
+offset_right = 1477.0
+offset_bottom = 247.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nlq5e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 6.87
+anchor_bottom = 5.511
+offset_left = 168.0
+offset_top = -463.0
+offset_right = -7191.6
+offset_bottom = -5371.9
+scale = Vector2(-35.9517, 22.0818)
+theme = SubResource("Theme_uqxbs")
+alignment = 1
+
+[node name="ResumeButton" type="Button" parent="."]
+top_level = true
+light_mask = 4
+visibility_layer = 4
+layout_mode = 0
+offset_left = -24.0
+offset_top = 1.0
+offset_right = 102.0
+offset_bottom = 32.0
+scale = Vector2(1.33982, 1.17749)
+theme_override_fonts/font = ExtResource("2_wwquk")
+text = "Resume"
+icon = ExtResource("3_scgui")
+flat = true
+
+[node name="SettingsButton" type="Button" parent="."]
+top_level = true
+light_mask = 4
+visibility_layer = 4
+layout_mode = 0
+offset_left = -39.0
+offset_top = 43.0
+offset_right = 109.0
+offset_bottom = 74.0
+scale = Vector2(1.31446, 1.55497)
+theme_override_fonts/font = ExtResource("2_wwquk")
+text = "Settings"
+icon = ExtResource("4_qff13")
+flat = true
+
+[node name="Quit to Menu" type="Button" parent="."]
+top_level = true
+light_mask = 4
+visibility_layer = 4
+layout_mode = 0
+offset_left = -22.0
+offset_top = 113.0
+offset_right = 156.0
+offset_bottom = 144.0
+theme_override_fonts/font = ExtResource("2_wwquk")
+text = "Quit to Menu"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+show_behind_parent = true
+layout_mode = 0
+offset_left = -1769.0
+offset_top = -659.0
+offset_right = -816.0
+offset_bottom = 304.0
+texture = ExtResource("5_w5j3p")
+
+[connection signal="pressed" from="ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="ResumeButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Quit to Menu" to="." method="_on_quit_to_menu_pressed"]

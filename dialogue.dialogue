@@ -1,0 +1,9 @@
+~ this_is_a_node_title
+Player: [[Hi|Hello|Howdy]], How are you standing here in this monster infested place?.
+Hunter: I came here looking for fresh meat but it seems i am stuck Can you kill the monsters so that i can find some game?
+- I will help You
+	Player: I will Kill all the mosters in the area
+- You are on your own
+	Player: now I will go my own way
+- End the conversation => END
+=> END

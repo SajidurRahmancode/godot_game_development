@@ -1,0 +1,91 @@
+[gd_scene load_steps=14 format=3 uid="uid://c2n6v2slosi0r"]
+
+[ext_resource type="Texture2D" uid="uid://f57pvbgof37o" path="res://sprites/96x96 - Explosive Assets, Blue-Sheet.png" id="1_1ld1a"]
+[ext_resource type="Script" path="res://scenes/scripts/grenade.gd" id="1_wnreb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhghs"]
+atlas = ExtResource("1_1ld1a")
+region = Rect2(0, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uu0bv"]
+atlas = ExtResource("1_1ld1a")
+region = Rect2(96, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7lps"]
+atlas = ExtResource("1_1ld1a")
+region = Rect2(192, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsxis"]
+atlas = ExtResource("1_1ld1a")
+region = Rect2(288, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5fg5m"]
+atlas = ExtResource("1_1ld1a")
+region = Rect2(384, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7clfg"]
+atlas = ExtResource("1_1ld1a")
+region = Rect2(672, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yu278"]
+atlas = ExtResource("1_1ld1a")
+region = Rect2(768, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwn72"]
+atlas = ExtResource("1_1ld1a")
+region = Rect2(864, 96, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kxhk6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhghs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uu0bv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a7lps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lsxis")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5fg5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7clfg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yu278")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mwn72")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_64aiy"]
+radius = 14.0357
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j73ls"]
+radius = 14.0
+
+[node name="Grenade" type="RigidBody2D"]
+script = ExtResource("1_wnreb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kxhk6")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_64aiy")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_j73ls")

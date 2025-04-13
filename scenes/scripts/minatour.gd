@@ -31,6 +31,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func flip():
+	if is_dead: #do not flip if dead.
+		return
+
 	facing_left = !facing_left
 	scale.x *= -1  # Flip the character sprite
 	speed *= -1  # Reverse the movement direction
@@ -38,10 +41,7 @@ func flip():
 
 func update_ray_direction():
 	# Move RayCast2D to always point forward
-	$RayCast2D.position.x  = abs($RayCast2D.position.x) * (-1 if facing_left else 1)
-
-
-
+	$RayCast2D.position.x = abs($RayCast2D.position.x) * (-1 if facing_left else 1)
 
 func _on_killzone_body_entered(body: Node2D) -> void:
 	if "player" in body.name:
@@ -56,5 +56,10 @@ func _on_getdamagebox_body_entered(body: Node2D) -> void:
 			animated_sprite_2d.play("death")
 			print("Death animation played.")
 			manager.add_point(150)
-		
-			queue_free()	
+
+			is_dead = true #set death flag.
+			speed = 0 #stop movement.
+			velocity.x = 0 #stop movement.
+			await animated_sprite_2d.animation_finished  # Wait for death animation to finish
+			await get_tree().create_timer(1.0).timeout  # Wait for 3 seconds
+			queue_free()

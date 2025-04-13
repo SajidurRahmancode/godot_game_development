@@ -1,0 +1,112 @@
+[gd_scene load_steps=16 format=3 uid="uid://ccn7nykemo7js"]
+
+[ext_resource type="Texture2D" uid="uid://c17c8g6wpclhi" path="res://sprites/cannon_spritesheet.png" id="1_e5l71"]
+[ext_resource type="Script" path="res://scenes/cannon.gd" id="1_ri3ca"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5l4gx"]
+atlas = ExtResource("1_e5l71")
+region = Rect2(0, 80, 54, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5d4l"]
+atlas = ExtResource("1_e5l71")
+region = Rect2(61, 80, 54, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f056e"]
+atlas = ExtResource("1_e5l71")
+region = Rect2(122, 80, 54, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ex2k"]
+atlas = ExtResource("1_e5l71")
+region = Rect2(183, 80, 54, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhq52"]
+atlas = ExtResource("1_e5l71")
+region = Rect2(244, 80, 54, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khhib"]
+atlas = ExtResource("1_e5l71")
+region = Rect2(305, 80, 54, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vb0ex"]
+atlas = ExtResource("1_e5l71")
+region = Rect2(366, 80, 54, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2b8u"]
+atlas = ExtResource("1_e5l71")
+region = Rect2(427, 80, 54, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k7nyx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5l4gx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5d4l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f056e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ex2k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vhq52")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khhib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vb0ex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2b8u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bs0x4"]
+size = Vector2(36, 29)
+
+[sub_resource type="Animation" id="Animation_3q23l"]
+resource_name = "fire"
+
+[sub_resource type="Animation" id="Animation_6awpm"]
+resource_name = "hit"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ig3sj"]
+_data = {
+"fire": SubResource("Animation_3q23l"),
+"hit": SubResource("Animation_6awpm")
+}
+
+[node name="Cannon" type="Node2D"]
+script = ExtResource("1_ri3ca")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(3, -1)
+sprite_frames = SubResource("SpriteFrames_k7nyx")
+autoplay = "default"
+frame = 2
+frame_progress = 0.602589
+
+[node name="Area2D" type="Area2D" parent="."]
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_bs0x4")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(10, -3)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ig3sj")
+}
+
+[node name="ShootTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_13"
+type="Resource"
+uid="uid://t12wqfplshxb"
+path="res://.godot/imported/TheBeginning.dialogue-7412c6c2afa12df73c53286e48fa45c0.tres"
+
+[deps]
+
+source_file="res://TheBeginning.dialogue"
+dest_files=["res://.godot/imported/TheBeginning.dialogue-7412c6c2afa12df73c53286e48fa45c0.tres"]
+
+[params]
+
+defaults=true

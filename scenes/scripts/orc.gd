@@ -66,4 +66,14 @@ func _on_animation_finished():
 		queue_free()		
 
 
+func die():
+	queue_free()  # Or whatever death logic you have
+
+# OR
+
+func take_damage(amount):
+	health -= amount
+	if health <= 0:
+		queue_free()
+
 	

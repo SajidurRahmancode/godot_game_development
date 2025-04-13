@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=3 uid="uid://2p57uoxqqeon"]
+
+[ext_resource type="Script" path="res://scenes/scripts/deathscreentry.gd" id="1_1djei"]
+[ext_resource type="FontFile" uid="uid://b7unlfawg1kum" path="res://fonts/PixelOperator8-Bold.ttf" id="1_a6nbk"]
+[ext_resource type="Script" path="res://scenes/scripts/restart_button.gd" id="2_i6ysu"]
+[ext_resource type="Texture2D" uid="uid://dffkvck0u018r" path="res://IconGodotNode/color/icon_weapon.png" id="4_e2jrs"]
+
+[node name="Deathscrenetry" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1djei")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -8.0
+offset_right = 1086.0
+offset_bottom = 908.0
+color = Color(0.0430392, 0.0430392, 0.0430392, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 119.0
+offset_top = 325.0
+offset_right = 982.0
+offset_bottom = 426.0
+theme_override_fonts/font = ExtResource("1_a6nbk")
+theme_override_font_sizes/font_size = 100
+text = "Game Over"
+
+[node name="ScoreLabel" type="Label" parent="."]
+top_level = true
+light_mask = 31
+visibility_layer = 31
+layout_mode = 0
+offset_left = 109.0
+offset_top = 121.0
+offset_right = 972.0
+offset_bottom = 222.0
+theme_override_fonts/font = ExtResource("1_a6nbk")
+theme_override_font_sizes/font_size = 50
+
+[node name="TimeLabel" type="Label" parent="."]
+top_level = true
+light_mask = 31
+layout_mode = 0
+offset_left = 109.0
+offset_top = 199.0
+offset_right = 972.0
+offset_bottom = 300.0
+theme_override_fonts/font = ExtResource("1_a6nbk")
+theme_override_font_sizes/font_size = 50
+
+[node name="RestartButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 374.0
+offset_top = 516.0
+offset_right = 720.0
+offset_bottom = 575.0
+theme_override_fonts/font = ExtResource("1_a6nbk")
+theme_override_font_sizes/font_size = 50
+text = "Restart"
+script = ExtResource("2_i6ysu")
+
+[node name="ContinueButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 441.0
+offset_top = 612.0
+offset_right = 685.0
+offset_bottom = 646.0
+theme_override_fonts/font = ExtResource("1_a6nbk")
+theme_override_font_sizes/font_size = 25
+theme_override_icons/icon = ExtResource("4_e2jrs")
+text = "Continue?"
+
+[connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]

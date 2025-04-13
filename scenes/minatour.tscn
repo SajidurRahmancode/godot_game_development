@@ -1,8 +1,28 @@
-[gd_scene load_steps=19 format=3 uid="uid://b2c2b14hx6y0s"]
+[gd_scene load_steps=24 format=3 uid="uid://b2c2b14hx6y0s"]
 
 [ext_resource type="Script" path="res://scenes/scripts/minatour.gd" id="1_8isk8"]
 [ext_resource type="Texture2D" uid="uid://bwgqor85xse68" path="res://sprites/Minotaur - Sprite Sheet.png" id="1_vmj0h"]
 [ext_resource type="PackedScene" uid="uid://gbc44wfm5b2o" path="res://scenes/killzone.tscn" id="12_5d7h1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rlif0"]
+atlas = ExtResource("1_vmj0h")
+region = Rect2(0, 273, 102, 91)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdc5h"]
+atlas = ExtResource("1_vmj0h")
+region = Rect2(102, 273, 102, 91)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4yupe"]
+atlas = ExtResource("1_vmj0h")
+region = Rect2(204, 273, 102, 91)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjcrj"]
+atlas = ExtResource("1_vmj0h")
+region = Rect2(306, 273, 102, 91)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmqe1"]
+atlas = ExtResource("1_vmj0h")
+region = Rect2(408, 273, 102, 91)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ov11i"]
 atlas = ExtResource("1_vmj0h")
@@ -52,6 +72,26 @@ region = Rect2(373, 91, 92, 91)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_rlif0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdc5h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4yupe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjcrj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmqe1")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ov11i")
 }, {
 "duration": 1.0,
@@ -71,7 +111,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death",
-"speed": 1.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -118,6 +158,8 @@ scale = Vector2(0.4577, 0.465204)
 sprite_frames = SubResource("SpriteFrames_iph33")
 animation = &"death"
 autoplay = "default"
+frame = 5
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 2
@@ -125,7 +167,7 @@ visibility_layer = 2
 position = Vector2(-1, -9)
 shape = SubResource("RectangleShape2D_e6ofk")
 
-[node name="WallRayCast2D" type="RayCast2D" parent="."]
+[node name="DetectRayCast2D" type="RayCast2D" parent="."]
 position = Vector2(-8, -8)
 target_position = Vector2(-32, 0)
 
