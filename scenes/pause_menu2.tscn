@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=3 uid="uid://twb8vci5pfoq"]
+
+[ext_resource type="FontFile" uid="uid://b7unlfawg1kum" path="res://fonts/PixelOperator8-Bold.ttf" id="1_a6nbk"]
+[ext_resource type="Script" path="res://scenes/scripts/pause_menu.gd" id="1_l4b75"]
+[ext_resource type="Script" path="res://scenes/scripts/restart_button.gd" id="2_i6ysu"]
+[ext_resource type="Texture2D" uid="uid://dffkvck0u018r" path="res://IconGodotNode/color/icon_weapon.png" id="4_e2jrs"]
+
+[node name="pause_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l4b75")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -8.0
+offset_right = 1086.0
+offset_bottom = 908.0
+color = Color(0.0430392, 0.0430392, 0.0430392, 1)
+
+[node name="ScoreLabel" type="Label" parent="."]
+top_level = true
+light_mask = 31
+visibility_layer = 31
+layout_mode = 0
+offset_left = 109.0
+offset_top = 121.0
+offset_right = 972.0
+offset_bottom = 222.0
+theme_override_fonts/font = ExtResource("1_a6nbk")
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="."]
+top_level = true
+light_mask = 31
+layout_mode = 0
+offset_left = 109.0
+offset_top = 199.0
+offset_right = 972.0
+offset_bottom = 300.0
+theme_override_fonts/font = ExtResource("1_a6nbk")
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 378.0
+offset_top = 231.0
+offset_right = 724.0
+offset_bottom = 290.0
+theme_override_fonts/font = ExtResource("1_a6nbk")
+theme_override_font_sizes/font_size = 50
+text = "Restart"
+script = ExtResource("2_i6ysu")
+
+[node name="ContinueButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 341.0
+offset_top = 95.0
+offset_right = 735.0
+offset_bottom = 213.0
+theme_override_fonts/font = ExtResource("1_a6nbk")
+theme_override_font_sizes/font_size = 25
+theme_override_icons/icon = ExtResource("4_e2jrs")
+text = "Resume"
+
+[node name="_on_quit_to_menu" type="Button" parent="."]
+layout_mode = 0
+offset_left = 502.0
+offset_top = 518.0
+offset_right = 656.0
+offset_bottom = 549.0
+text = "Quit to Main Menu"
+
+[connection signal="pressed" from="_on_quit_to_menu" to="." method="_on__on_quit_to_menu_pressed"]

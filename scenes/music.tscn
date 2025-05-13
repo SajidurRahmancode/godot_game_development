@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://up7wcdo2jo3u"]
+
+[ext_resource type="AudioStream" uid="uid://xewdvpaqxkku" path="res://music/added new/Clement Panchout _ 80s Zombies Movie _ 2018.wav" id="1_wetul"]
+
+[node name="Music" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_wetul")
+autoplay = true
+bus = &"Theme"

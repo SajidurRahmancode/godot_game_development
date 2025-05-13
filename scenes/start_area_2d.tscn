@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://di05mjleqnlhf"]
+
+[ext_resource type="Script" path="res://scenes/start_area_2d.gd" id="1_72hfw"]
+[ext_resource type="Resource" uid="uid://t12wqfplshxb" path="res://TheBeginning.dialogue" id="2_ysntg"]
+[ext_resource type="Script" path="res://scenes/dialogue_manager.gd" id="4_gx8sp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d0n5h"]
+radius = 83.006
+
+[node name="StartArea2d" type="Area2D"]
+position = Vector2(39, 38)
+script = ExtResource("1_72hfw")
+dialogue_resource = ExtResource("2_ysntg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(91, -3)
+shape = SubResource("CircleShape2D_d0n5h")
+
+[node name="DialogueManager" type="Node" parent="."]
+script = ExtResource("4_gx8sp")
+
+[connection signal="got_dialogue" from="DialogueManager" to="." method="_on_dialogue_manager_got_dialogue"]

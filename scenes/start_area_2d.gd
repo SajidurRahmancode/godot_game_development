@@ -8,6 +8,7 @@ extends Area2D
 @export var quest_notification_scene: PackedScene
 var quest_notification: Control = null
 var dialogue_active: bool = false
+var current_balloon: CanvasLayer = null  # Add this to track the current balloon
 
 func _ready() -> void:
 	print("[DEBUG] Area2D ready - initializing...")
@@ -23,6 +24,12 @@ func _ready() -> void:
 		print("[DEBUG] Notification scene added to tree")
 	else:
 		printerr("[ERROR] No quest_notification_scene assigned!")
+
+func _input(event: InputEvent) -> void:
+	# Add this new function to handle ESC key press
+	if event.is_action_pressed("ui_cancel") and dialogue_active and current_balloon:
+		print("[DEBUG] ESC pressed - closing dialogue")
+		close_dialogue()
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") and not dialogue_active:
@@ -42,9 +49,9 @@ func start_dialogue() -> void:
 		return
 
 	print("[DEBUG] Attempting to show dialogue balloon")
-	var balloon = dialogue_manager.show_dialogue_balloon(dialogue_resource)
+	current_balloon = dialogue_manager.show_dialogue_balloon(dialogue_resource)
 
-	if balloon:
+	if current_balloon:
 		print("[DEBUG] Dialogue balloon created successfully")
 
 		# Connect to available signals instead
@@ -58,6 +65,17 @@ func start_dialogue() -> void:
 	else:
 		printerr("[ERROR] Failed to create dialogue balloon!")
 		dialogue_active = false
+
+func close_dialogue() -> void:
+	# New function to cleanly close the dialogue
+	if current_balloon:
+		current_balloon.queue_free()
+		current_balloon = null
+	
+	dialogue_active = false
+	# Emit the ended signal manually since we're skipping
+	dialogue_manager.dialogue_ended.emit(dialogue_resource)
+	print("[DEBUG] Dialogue closed via ESC")
 
 func _on_dialogue_line(line: DialogueLine):
 	print("[DEBUG] Received dialogue line: ", line)
@@ -112,3 +130,4 @@ func handle_quest_complete(quest_id: String) -> void:
 func _on_dialogue_ended():
 	print("[DEBUG] Dialogue ended")
 	dialogue_active = false
+	current_balloon = null  # Clear reference when dialogue ends normally

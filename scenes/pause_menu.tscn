@@ -85,7 +85,7 @@ offset_right = -816.0
 offset_bottom = 304.0
 texture = ExtResource("5_w5j3p")
 
-[connection signal="pressed" from="ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="ResumeButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="SettingsButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="Quit to Menu" to="." method="_on_quit_to_menu_pressed"]

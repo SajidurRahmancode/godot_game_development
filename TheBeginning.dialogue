@@ -1,8 +1,7 @@
-Player: No. It can't be!
-Player: The place I once called home is no more.
-Player: How did it happen? HOW DID IT START??
-Player: I need to find the place where it all started.
-Player: I need to find the place where it all started.
-[quest_start my_first_quest]
-Player: "Here's your new quest!"..
+Tutorial 1: Use A key for Left (Mouse Left click to coninue ,Press ESC to skip)
+Tutorial 1: Use D key for Right (Mouse Left click to coninue)
+Tutorial 1: Space for jump (Mouse Left click to coninue)
+Tutorial 1: You have to jump above the enemies to kill/damage them (Mouse Left click for next)
+Tutorial 1: If you touch the enemies on any side of the enemies you die. (Mouse Left click to coninue)
+
 => END

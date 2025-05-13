@@ -16,7 +16,7 @@ func _on_resume_button_pressed():
 
 
 
-func _on_quit_to_menu_pressed() -> void:
+func _on__on_quit_to_menu_pressed() -> void:
 	emit_signal("quit_to_menu_requested")
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

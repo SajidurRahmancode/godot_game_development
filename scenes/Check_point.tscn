@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bimx2733ewjej"]
+
+[ext_resource type="Script" path="res://scenes/scripts/check_point.gd" id="1_a8vro"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fh2sb"]
+size = Vector2(487.563, 880.688)
+
+[node name="Checkpoint" type="Area2D"]
+script = ExtResource("1_a8vro")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -100)
+shape = SubResource("RectangleShape2D_fh2sb")
+
+[node name="RespawnPoint" type="Marker2D" parent="."]
+position = Vector2(-2, 194)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
